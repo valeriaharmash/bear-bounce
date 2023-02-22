@@ -1,7 +1,7 @@
 import './Game.css';
 import React, { useRef, useEffect, useState } from 'react';
-import { Application, Sprite } from 'pixi.js';
-import { Hero } from '../gameComponents';
+import { Application } from 'pixi.js';
+import { Hero, ObstacleManager } from '../gameComponents';
 import { Ground } from '../gameComponents';
 
 const CANVAS_HEIGHT = 600;
@@ -13,25 +13,16 @@ const app = new Application({
   backgroundColor: 0x5bba6f,
 });
 
-// const createGround = (x) => {
-//   const ground = Sprite.from('imgs/ground.png');
-//   ground.x = x;
-//   ground.y = CANVAS_HEIGHT * 0.88;
-//   ground.scale._y = 0.5;
-//   ground.interactive = true;
-//   return ground;
-// };
-
 const Game = () => {
   const ref = useRef(null);
-  const [grounds, setGrounds] = useState([]);
+
+  const ground = new Ground('imgs/ground.png');
+  const hero = new Hero('imgs/dino-stationary.png');
+  const obstacleManager = new ObstacleManager();
 
   useEffect(() => {
     ref.current.appendChild(app.view);
     app.start();
-    const hero = new Hero('imgs/dino-stationary.png');
-    const ground = new Ground('imgs/ground.png');
-    setGrounds([ground]);
 
     document.removeEventListener('keydown', (event) => hero.onJump(event));
     document.addEventListener('keydown', (event) => hero.onJump(event));
@@ -39,8 +30,13 @@ const Game = () => {
     app.stage.addChild(ground.element);
     app.stage.addChild(hero.element);
 
+    obstacleManager.obstacles.forEach((obstacle) => {
+      app.stage.addChild(obstacle.element);
+    });
+
     app.ticker.add(function (delta) {
-      ground.updateGround();
+      obstacleManager.moveObstacles();
+      ground.updateGround(delta);
     });
 
     return () => app.stop();
