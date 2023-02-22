@@ -1,8 +1,9 @@
 import './Game.css';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Application } from 'pixi.js';
-import { Hero, ObstacleManager } from '../gameComponents';
+import { Hero, ObstacleManager, Score } from '../gameComponents';
 import { Ground } from '../gameComponents';
+import { detectCollision } from '../gameComponents/utils';
 
 const CANVAS_HEIGHT = 600;
 const CANVAS_WIDTH = 800;
@@ -19,6 +20,7 @@ const Game = () => {
   const ground = new Ground('imgs/ground.png');
   const hero = new Hero('imgs/dino-stationary.png');
   const obstacleManager = new ObstacleManager();
+  const score = new Score('SCORE:');
 
   useEffect(() => {
     ref.current.appendChild(app.view);
@@ -29,6 +31,7 @@ const Game = () => {
 
     app.stage.addChild(ground.element);
     app.stage.addChild(hero.element);
+    app.stage.addChild(score.element);
 
     obstacleManager.obstacles.forEach((obstacle) => {
       app.stage.addChild(obstacle.element);
@@ -36,6 +39,13 @@ const Game = () => {
 
     app.ticker.add(function (delta) {
       obstacleManager.moveObstacles();
+      score.updateScore(delta);
+      obstacleManager.obstacles.forEach((obstacle) => {
+        if (detectCollision(hero.element, obstacle.element)) {
+          app.stop();
+        }
+      });
+
       ground.updateGround(delta);
     });
 
