@@ -8,7 +8,7 @@ class Obstacle {
     this.element.x = x;
     this.element.y = 600 * 0.8;
     this.element.scale.set(0.7, 0.7);
-    this.speed = 2;
+    this.speed = 3;
   }
   updateObstacle() {
     this.element.x -= this.speed;

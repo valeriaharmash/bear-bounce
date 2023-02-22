@@ -8,7 +8,7 @@ class Score {
     this.score = 0;
   }
   updateScore(delta) {
-    this.score += delta * 0.01;
+    this.score += delta * 0.02;
     this.element.text = `Score: ${Math.floor(this.score)}`;
   }
 }

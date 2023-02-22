@@ -6,7 +6,7 @@ class Ground {
     this.element = new TilingSprite(texture, 800, 40);
     this.element.y = 600 * 0.88;
     this.element.scale._y = 0.5;
-    this.speed = 2;
+    this.speed = 3;
   }
   updateGround() {
     this.element.tilePosition.x -= this.speed;
