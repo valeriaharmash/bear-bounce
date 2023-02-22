@@ -36,9 +36,12 @@ const Game = () => {
     document.removeEventListener('keydown', (event) => hero.onJump(event));
     document.addEventListener('keydown', (event) => hero.onJump(event));
 
-    console.log(ground.element);
     app.stage.addChild(ground.element);
     app.stage.addChild(hero.element);
+
+    app.ticker.add(function (delta) {
+      ground.updateGround();
+    });
 
     return () => app.stop();
   }, []);
