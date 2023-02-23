@@ -11,8 +11,8 @@ const style = new TextStyle({
 class StartGameButton extends Text {
   constructor(onClick) {
     super('Press any button to start', style);
-    this.x = window.innerWidth * 0.4;
-    this.y = window.innerHeight * 0.47;
+    this.x = window.innerWidth * 0.34;
+    this.y = window.innerHeight * 0.48;
     this.onClick = onClick;
 
     document.removeEventListener('keydown', (event) => this.onClick(event));

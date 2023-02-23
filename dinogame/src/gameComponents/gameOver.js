@@ -9,7 +9,7 @@ const style = new TextStyle({
 class GameOverText {
   constructor(myText) {
     this.element = new Text(myText, style);
-    this.element.x = window.innerWidth * 0.43;
+    this.element.x = window.innerWidth * 0.38;
     this.element.y = window.innerHeight * 0.4;
     this.score = 0;
   }
