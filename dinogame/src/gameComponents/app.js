@@ -22,7 +22,7 @@ class Game extends Application {
     this.init();
   }
   init() {
-    this.ground = new Ground('imgs/ground.png');
+    this.ground = new Ground('imgs/ground.jpeg');
     this.hero = new Hero('imgs/dino-stationary.png');
     this.obstacleManager = new ObstacleManager();
     this.score = new Score();
