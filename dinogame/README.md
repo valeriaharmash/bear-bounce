@@ -1,1 +1,1 @@
-# Dino Game
+# Running Bear Game

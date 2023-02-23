@@ -6,6 +6,7 @@ import { Score } from './scoreBoard';
 import { detectCollision } from './utils';
 import { GameOverText } from './gameOver';
 import { StartGameButton } from './startGameButton';
+import { Clouds } from './clouds';
 
 const CANVAS_HEIGHT = window.innerHeight;
 const CANVAS_WIDTH = window.innerWidth;
@@ -15,15 +16,16 @@ class Game extends Application {
     super({
       width: CANVAS_WIDTH,
       height: CANVAS_HEIGHT,
-      backgroundColor: 0x5bba6f,
+      backgroundColor: 0x2980b9,
     });
     this.playing = false;
 
     this.init();
   }
   init() {
+    this.clouds = new Clouds('imgs/clouds.png');
     this.ground = new Ground('imgs/ground.jpeg');
-    this.hero = new Hero('imgs/dino-stationary.png');
+    this.hero = new Hero();
     this.obstacleManager = new ObstacleManager();
     this.score = new Score();
     this.gameOverText = new GameOverText('Game Over');
@@ -36,6 +38,7 @@ class Game extends Application {
         this.playing = true;
       }
     });
+    this.stage.addChild(this.clouds.element);
     this.stage.addChild(this.ground.element);
     this.stage.addChild(this.hero.element);
     this.stage.addChild(this.score.element);
@@ -56,6 +59,7 @@ class Game extends Application {
         this.stage.addChild(this.startGameButton);
       }
     });
+    this.clouds.updateClouds(delta);
     this.ground.updateGround(delta);
   }
   resetGame() {

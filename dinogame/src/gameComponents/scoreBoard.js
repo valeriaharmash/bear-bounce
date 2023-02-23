@@ -3,8 +3,8 @@ import { Text } from 'pixi.js';
 class Score {
   constructor(myText) {
     this.element = new Text(myText);
-    this.element.x = 800 * 0.7;
-    this.element.y = 600 * 0.5;
+    this.element.x = window.innerWidth * 0.44;
+    this.element.y = window.innerHeight * 0.33;
     this.score = 0;
   }
   updateScore(delta) {

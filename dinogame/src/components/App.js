@@ -5,7 +5,7 @@ const App = () => {
   return (
     <div className="App">
       <header>
-        <h1>Dino Game</h1>
+        <h1>Running Bear</h1>
       </header>
       <Game />
     </div>
