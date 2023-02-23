@@ -5,13 +5,16 @@ const GRAVITY = 1;
 class Hero {
   constructor(graphics) {
     this.element = Sprite.from(graphics);
-    this.element.x = 800 * 0.03;
-    this.element.y = 600 * 0.8;
+    this.element.x = window.innerWidth * 0.03;
+    this.element.y = window.innerHeight * 0.8;
     this.element.scale.set(0.5, 0.5);
     this.isJumping = false;
     this.power = 20;
     this.direction = -1;
     this.jumpAt = this.element.y;
+
+    document.removeEventListener('keydown', (event) => this.onJump(event));
+    document.addEventListener('keydown', (event) => this.onJump(event));
   }
 
   onJump(event) {

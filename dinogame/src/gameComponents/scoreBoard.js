@@ -11,6 +11,10 @@ class Score {
     this.score += delta * 0.02;
     this.element.text = `Score: ${Math.floor(this.score)}`;
   }
+  resetScore() {
+    this.score = 0;
+    this.element.text = 'Score: 0';
+  }
 }
 
 export { Score };

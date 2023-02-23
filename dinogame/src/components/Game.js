@@ -2,14 +2,15 @@ import './Game.css';
 import React, { useRef, useEffect } from 'react';
 import { Game as gameApp } from '../gameComponents';
 
-const app = new gameApp();
-
 const Game = () => {
   const ref = useRef(null);
 
+  const app = new gameApp();
+
   useEffect(() => {
     ref.current.appendChild(app.view);
-    app.start();
+
+    app.startGame();
 
     return () => app.stop();
   }, []);

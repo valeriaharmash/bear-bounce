@@ -6,9 +6,9 @@ class Obstacle {
     const texture = Texture.from(graphics);
     this.element = new Sprite(texture);
     this.element.x = x;
-    this.element.y = 600 * 0.8;
+    this.element.y = window.innerHeight * 0.8;
     this.element.scale.set(0.7, 0.7);
-    this.speed = 3;
+    this.speed = 4;
   }
   updateObstacle() {
     this.element.x -= this.speed;
@@ -35,6 +35,11 @@ class ObstacleManager {
   moveObstacles() {
     this.obstacles.forEach((obstacle) => {
       obstacle.updateObstacle();
+    });
+  }
+  resetObstacles() {
+    this.obstacles.forEach((obstacle) => {
+      obstacle.element.x = randomNumberBetween(800, 1500);
     });
   }
 }

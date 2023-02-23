@@ -1,21 +1,15 @@
-import { Ticker, TilingSprite, Texture } from 'pixi.js';
+import { TilingSprite, Texture } from 'pixi.js';
 
 class Ground {
   constructor(graphics) {
     const texture = Texture.from(graphics);
-    this.element = new TilingSprite(texture, 800, 40);
-    this.element.y = 600 * 0.88;
+    this.element = new TilingSprite(texture, window.innerWidth, 40);
+    this.element.y = window.innerHeight * 0.84;
     this.element.scale._y = 0.5;
-    this.speed = 3;
+    this.speed = 4;
   }
   updateGround() {
     this.element.tilePosition.x -= this.speed;
-  }
-  moveGround() {
-    const tick = (delta) => {
-      this.updateGround();
-    };
-    Ticker.shared.add(tick);
   }
 }
 
