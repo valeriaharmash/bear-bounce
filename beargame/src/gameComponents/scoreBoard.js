@@ -8,10 +8,8 @@ class Score extends Text {
       stroke: 'black',
       strokeThickness: 4,
     });
-
     super(myText, style);
-    this.x = window.innerWidth * 0.42;
-    this.y = window.innerHeight * 0.33;
+    this.onResize(window.innerWidth, window.innerHeight);
     this.score = 0;
   }
   updateScore(delta) {
@@ -21,6 +19,10 @@ class Score extends Text {
   resetScore() {
     this.score = 0;
     this.text = 'Score: 0';
+  }
+  onResize(width, height) {
+    this.x = width * 0.42;
+    this.y = height * 0.33;
   }
 }
 

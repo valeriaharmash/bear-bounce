@@ -6,7 +6,7 @@ class Obstacle extends Sprite {
     const texture = Texture.from(graphics);
     super(texture);
     this.x = x;
-    this.y = window.innerHeight * 0.8;
+    this.onResize(window.innerWidth, window.innerHeight);
     this.scale.set(0.08, 0.08);
     this.speed = 6;
   }
@@ -19,6 +19,9 @@ class Obstacle extends Sprite {
       this.x = randomNumberBetween(lowerBound, upperBound);
       return;
     }
+  }
+  onResize(width, height) {
+    this.y = height * 0.8;
   }
 }
 
@@ -45,6 +48,9 @@ class ObstacleManager {
     this.obstacles.forEach((obstacle) => {
       obstacle.x = randomNumberBetween(800, 1500);
     });
+  }
+  onResize(width, height) {
+    this.obstacles.forEach((obstacle) => obstacle.onResize(width, height));
   }
 }
 

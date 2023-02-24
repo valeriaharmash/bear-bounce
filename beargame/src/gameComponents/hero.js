@@ -158,10 +158,9 @@ class Hero extends AnimatedSprite {
 
     this.animationSpeed = 0.17;
     this.play();
-
-    this.x = window.innerWidth * 0.03;
-    this.y = window.innerHeight * 0.77;
-    this.scale.set(0.3, 0.3);
+    this.initialScreenWidth = window.screen.width;
+    this.initialScreenHeight = window.screen.height;
+    this.onResize(window.innerWidth, window.innerHeight);
     this.isJumping = false;
     this.power = 20;
     this.direction = -1;
@@ -197,6 +196,14 @@ class Hero extends AnimatedSprite {
     };
 
     Ticker.shared.add(tick);
+  }
+  onResize(width, height) {
+    const widthRatio = width / this.initialScreenWidth;
+    const heightRatio = width / this.initialScreenHeight;
+    const ratio = (widthRatio + heightRatio) * 0.15;
+    this.scale.set(ratio, ratio);
+    this.x = width * 0.03;
+    this.y = height * 0.74;
   }
 }
 

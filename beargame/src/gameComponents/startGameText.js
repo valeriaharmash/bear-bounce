@@ -1,6 +1,6 @@
 import { Text, TextStyle } from 'pixi.js';
 
-class StartGameButton extends Text {
+class StartGameText extends Text {
   constructor(onClick) {
     const style = new TextStyle({
       fontFamily: 'Press Start 2P',
@@ -11,13 +11,16 @@ class StartGameButton extends Text {
       align: 'center',
     });
     super('Press any key to start', style);
-    this.x = window.innerWidth * 0.34;
-    this.y = window.innerHeight * 0.48;
+    this.onResize(window.innerWidth, window.innerHeight);
     this.onClick = onClick;
 
     document.removeEventListener('keydown', (event) => this.onClick(event));
     document.addEventListener('keydown', (event) => this.onClick(event));
   }
+  onResize(width, heigth) {
+    this.x = width * 0.4;
+    this.y = heigth * 0.48;
+  }
 }
 
-export { StartGameButton };
+export { StartGameText };

@@ -5,23 +5,23 @@ import { ObstacleManager } from './obstacle';
 import { Score } from './scoreBoard';
 import { detectCollision } from './utils';
 import { GameOverText } from './gameOver';
-import { StartGameButton } from './startGameButton';
+import { StartGameText } from './startGameText';
 import { Clouds } from './clouds';
 import { Howl } from 'howler';
-
-const CANVAS_HEIGHT = window.innerHeight;
-const CANVAS_WIDTH = window.innerWidth;
 
 class Game extends Application {
   constructor() {
     super({
-      width: CANVAS_WIDTH,
-      height: CANVAS_HEIGHT - 100,
+      width: window.innerWidth,
+      height: window.innerHeight * 0.8,
       backgroundColor: 0x2980b9,
+      resizeTo: window,
     });
     this.playing = false;
 
     this.init();
+
+    this.renderer.on('resize', (width, height) => this.onResize(width, height));
   }
   init() {
     this.gameOverSound = new Howl({
@@ -33,10 +33,10 @@ class Game extends Application {
     this.obstacleManager = new ObstacleManager();
     this.score = new Score();
     this.gameOverText = new GameOverText('Game Over');
-    this.startGameButton = new StartGameButton((event) => {
+    this.startGameText = new StartGameText((event) => {
       if (!this.playing) {
         this.resetGame();
-        this.stage.removeChild(this.startGameButton);
+        this.stage.removeChild(this.startGameText);
         this.stage.removeChild(this.gameOverText);
         this.gameTiker.start();
         this.playing = true;
@@ -60,7 +60,7 @@ class Game extends Application {
         this.playing = false;
         this.gameTiker.stop();
         this.stage.addChild(this.gameOverText);
-        this.stage.addChild(this.startGameButton);
+        this.stage.addChild(this.startGameText);
         return;
       }
     }
@@ -75,7 +75,16 @@ class Game extends Application {
     this.stage.removeChild(this.gameOverText);
     this.gameTiker.stop();
     this.start();
-    this.stage.addChild(this.startGameButton);
+    this.stage.addChild(this.startGameText);
+  }
+  onResize(width, height) {
+    this.startGameText.onResize(width, height);
+    this.score.onResize(width, height);
+    this.gameOverText.onResize(width, height);
+    this.clouds.onResize(width, height);
+    this.hero.onResize(width, height);
+    this.obstacleManager.onResize(width, height);
+    this.ground.onResize(width, height);
   }
 }
 

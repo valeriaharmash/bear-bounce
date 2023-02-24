@@ -8,11 +8,15 @@ class GameOverText extends Text {
       fill: '0xff1010',
       stroke: 'black',
       strokeThickness: 4,
+      align: 'center',
     });
     super(myText, style);
-    this.x = window.innerWidth * 0.38;
-    this.y = window.innerHeight * 0.4;
+    this.onResize(window.innerWidth, window.innerHeight);
     this.score = 0;
+  }
+  onResize(width, heigth) {
+    this.x = width * 0.36;
+    this.y = heigth * 0.4;
   }
 }
 
