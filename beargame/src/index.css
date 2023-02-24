@@ -1,0 +1,19 @@
+* {
+  background-color: #2980b9;
+}
+
+h1 {
+  margin-left: 40px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', cursive;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
