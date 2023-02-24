@@ -1,4 +1,5 @@
 import { Ticker, Spritesheet, AnimatedSprite, BaseTexture } from 'pixi.js';
+import { Howl } from 'howler';
 
 const GRAVITY = 1;
 
@@ -146,24 +147,28 @@ const heroData = {
   },
 };
 
-class Hero {
+class Hero extends AnimatedSprite {
   constructor() {
     const spritesheet = new Spritesheet(
       BaseTexture.from(heroData.meta.image),
       heroData
     );
     spritesheet.parse();
-    this.element = new AnimatedSprite(spritesheet.animations.hero);
-    this.element.animationSpeed = 0.17;
-    this.element.play();
+    super(spritesheet.animations.hero);
 
-    this.element.x = window.innerWidth * 0.03;
-    this.element.y = window.innerHeight * 0.77;
-    this.element.scale.set(0.3, 0.3);
+    this.animationSpeed = 0.17;
+    this.play();
+
+    this.x = window.innerWidth * 0.03;
+    this.y = window.innerHeight * 0.77;
+    this.scale.set(0.3, 0.3);
     this.isJumping = false;
     this.power = 20;
     this.direction = -1;
-    this.jumpAt = this.element.y;
+    this.jumpAt = this.y;
+    this.jumpSound = new Howl({
+      src: ['/sounds/jump.mp3'],
+    });
 
     document.removeEventListener('keydown', (event) => this.onJump(event));
     document.addEventListener('keydown', (event) => this.onJump(event));
@@ -171,6 +176,7 @@ class Hero {
   onJump(event) {
     if (event.code !== 'Space' || this.isJumping) return;
     this.isJumping = true;
+    this.jumpSound.play();
 
     let time = 0;
 
@@ -182,11 +188,11 @@ class Hero {
       if (jumpHeight < 0) {
         this.isJumping = false;
         Ticker.shared.remove(tick);
-        this.element.y = this.jumpAt;
+        this.y = this.jumpAt;
         return;
       }
 
-      this.element.y = this.jumpAt + jumpHeight * this.direction;
+      this.y = this.jumpAt + jumpHeight * this.direction;
       time += deltaMs;
     };
 

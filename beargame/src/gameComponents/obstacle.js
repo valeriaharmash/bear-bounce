@@ -1,22 +1,22 @@
 import { Texture, Sprite } from 'pixi.js';
 import { randomNumberBetween } from './utils';
 
-class Obstacle {
+class Obstacle extends Sprite {
   constructor(graphics, x) {
     const texture = Texture.from(graphics);
-    this.element = new Sprite(texture);
-    this.element.x = x;
-    this.element.y = window.innerHeight * 0.8;
-    this.element.scale.set(0.08, 0.08);
+    super(texture);
+    this.x = x;
+    this.y = window.innerHeight * 0.8;
+    this.scale.set(0.08, 0.08);
     this.speed = 6;
   }
   updateObstacle(idx) {
-    this.element.x -= this.speed;
+    this.x -= this.speed;
 
-    if (this.element.x < -30) {
+    if (this.x < -30) {
       const lowerBound = window.innerWidth + idx * 400;
       const upperBound = lowerBound + 400;
-      this.element.x = randomNumberBetween(lowerBound, upperBound);
+      this.x = randomNumberBetween(lowerBound, upperBound);
       return;
     }
   }
@@ -43,7 +43,7 @@ class ObstacleManager {
   }
   resetObstacles() {
     this.obstacles.forEach((obstacle) => {
-      obstacle.element.x = randomNumberBetween(800, 1500);
+      obstacle.x = randomNumberBetween(800, 1500);
     });
   }
 }

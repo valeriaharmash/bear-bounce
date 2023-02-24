@@ -1,14 +1,14 @@
 import { TilingSprite, Texture } from 'pixi.js';
 
-class Ground {
+class Ground extends TilingSprite {
   constructor(graphics) {
     const texture = Texture.from(graphics);
-    this.element = new TilingSprite(texture, window.innerWidth, 90);
-    this.element.y = window.innerHeight * 0.84;
+    super(texture, window.innerWidth, 90);
+    this.y = window.innerHeight * 0.84;
     this.speed = 6;
   }
   updateGround() {
-    this.element.tilePosition.x -= this.speed;
+    this.tilePosition.x -= this.speed;
   }
 }
 

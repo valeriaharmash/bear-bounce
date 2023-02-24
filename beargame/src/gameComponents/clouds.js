@@ -1,14 +1,14 @@
 import { TilingSprite, Texture } from 'pixi.js';
 
-class Clouds {
+class Clouds extends TilingSprite {
   constructor(graphics) {
     const texture = Texture.from(graphics);
-    this.element = new TilingSprite(texture, window.innerWidth, 259);
-    this.element.y = window.innerHeight * 0.01;
+    super(texture, window.innerWidth, window.innerHeight * 0.265);
+    this.y = window.innerHeight * 0.01;
     this.speed = 4;
   }
   updateClouds() {
-    this.element.tilePosition.x -= this.speed;
+    this.tilePosition.x -= this.speed;
   }
 }
 
