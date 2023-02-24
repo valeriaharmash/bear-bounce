@@ -36,5 +36,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "Custom 2d game inspired by Dino Google game.",
+  "main": "beargame/index.js",
+  "devDependencies": {},
+  "author": "Valeriia Harmash",
+  "license": "ISC"
 }

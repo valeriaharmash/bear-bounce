@@ -149,32 +149,48 @@ const heroData = {
 
 class Hero extends AnimatedSprite {
   constructor() {
+    // load herp frames
     const spritesheet = new Spritesheet(
       BaseTexture.from(heroData.meta.image),
       heroData
     );
+    //  parse hero frames
     spritesheet.parse();
+    // init AnimatedSprite from spritesheet
     super(spritesheet.animations.hero);
-
+    // set animation speed
     this.animationSpeed = 0.17;
+    // run anymation
     this.play();
-    this.initialScreenWidth = window.screen.width;
-    this.initialScreenHeight = window.screen.height;
+    // set hero size
+    this.scale.set(0.4, 0.4);
+    // set initial location
     this.onResize(window.innerWidth, window.innerHeight);
+    // set isJumping state
     this.isJumping = false;
+    // set jump power
     this.power = 20;
+    // set jump direction
     this.direction = -1;
+    // set original hero position
     this.jumpAt = this.y;
+    // load jump sound
     this.jumpSound = new Howl({
       src: ['/sounds/jump.mp3'],
     });
 
+    //  remove existing "keydown" listenre
     document.removeEventListener('keydown', (event) => this.onJump(event));
+    // add new 'keydown' listener to handle jumps
     document.addEventListener('keydown', (event) => this.onJump(event));
   }
+// onJump performs hero jump
   onJump(event) {
+    // only jump is not isJumpint and "Space" key pressed
     if (event.code !== 'Space' || this.isJumping) return;
+    // set isJumping state to true
     this.isJumping = true;
+    // play jump sound
     this.jumpSound.play();
 
     let time = 0;
@@ -184,9 +200,13 @@ class Hero extends AnimatedSprite {
         (-GRAVITY / 2) * Math.pow(time, 2) + this.power * time
       );
 
+      // clean up jump ticker if back to initial position
       if (jumpHeight < 0) {
+        //  set isJumping state to false
         this.isJumping = false;
+        // remove tocker
         Ticker.shared.remove(tick);
+        // reset initial hero position
         this.y = this.jumpAt;
         return;
       }
@@ -194,16 +214,15 @@ class Hero extends AnimatedSprite {
       this.y = this.jumpAt + jumpHeight * this.direction;
       time += deltaMs;
     };
-
+    // start jump ticker
     Ticker.shared.add(tick);
   }
+  // onResize adjusts hero location based on window size
   onResize(width, height) {
-    const widthRatio = width / this.initialScreenWidth;
-    const heightRatio = width / this.initialScreenHeight;
-    const ratio = (widthRatio + heightRatio) * 0.15;
-    this.scale.set(ratio, ratio);
-    this.x = width * 0.03;
-    this.y = height * 0.74;
+    this.x = width * 0.05;
+    // current height - 2 * ground height
+    this.y = height - 200;
+    this.jumpAt = this.y;
   }
 }
 

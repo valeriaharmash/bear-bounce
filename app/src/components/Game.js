@@ -1,11 +1,11 @@
 import './Game.css';
 import React, { useRef, useEffect } from 'react';
-import { Game as gameApp } from '../gameComponents';
+import { App } from '../gameComponents';
 
 const Game = () => {
   const ref = useRef(null);
 
-  const app = new gameApp();
+  const app = new App();
 
   useEffect(() => {
     ref.current.appendChild(app.view);
