@@ -73,9 +73,9 @@ class Game extends Application {
   }
   startGame() {
     this.stage.removeChild(this.gameOverText);
-    this.stage.addChild(this.startGameButton);
     this.gameTiker.stop();
     this.start();
+    this.stage.addChild(this.startGameButton);
   }
 }
 
