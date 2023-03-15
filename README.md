@@ -1,6 +1,6 @@
-# Running Bear Game
+# Bear Bounce Game
 ![game_screenshot](app/public/screenshots/game.png)
-Custom 2d game inspired by [Dino Google game](https://dino-chrome.com/en).
+A custom 2d game inspired by [T-Rex Google game](https://dino-chrome.com/en).
 
 ## Technologies
 

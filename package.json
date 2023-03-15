@@ -1,0 +1,21 @@
+{
+  "name": "bearbounce",
+  "version": "1.0.0",
+  "description": "A custom 2d game inspired by T-Rex Google game.",
+  "main": "app/index.js",
+  "scripts": {
+      "install": "npm install --prefix ./app",
+      "start": "npm run start-app",
+      "start-app": "npm run start --prefix ./app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valeriaharmash/Async-week-project.git"
+  },
+  "author": "Valeriia Harmash",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/valeriaharmash/Async-week-project/issues"
+  },
+  "homepage": "https://github.com/valeriaharmash/Async-week-project#readme"
+}
